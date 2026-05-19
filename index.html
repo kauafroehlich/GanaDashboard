@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard de Gestão da Seleção Nacional de Futebol de Gana — Copa do Mundo 2026">
+    <title>Gana Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header__tricolor">
+            <div class="header__tricolor-red"></div>
+            <div class="header__tricolor-yellow"></div>
+            <div class="header__tricolor-green"></div>
+        </div>
+        <div class="header__content">
+            <div class="header__left">
+                <img src="escudodaselecaodegana.png" alt="Escudo da Seleção de Gana" class="header__crest">
+                <div class="header__text">
+                    <span class="header__subtitle">Seleção Nacional de Futebol</span>
+                    <h1>Gana</h1>
+                </div>
+            </div>
+            <img src="bandeiradegana.png" alt="Bandeira de Gana" class="header__flag">
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+        <div class="dashboard-grid">
+
+            <!-- CARD 1: Registro de Comandante -->
+            <div class="card" style="animation-delay: 0s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--green"></div>
+                    <h2>Registro de Comandante</h2>
+                </div>
+                <div class="card__body">
+                    <label class="input-label" for="nomeComandante">Nome do Comandante</label>
+                    <input class="inputGrande" type="text" id="nomeComandante" placeholder="Seu nome...">
+                    <button class="botaoGrande" onclick="assumirCargo()">Assumir Cargo</button>
+                    <span id="exibirNomeComandante"></span>
+                </div>
+            </div>
+
+            <!-- CARD 2: Simulador de Fase de Grupos -->
+            <div class="card" style="animation-delay: 0.1s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--red"></div>
+                    <h2>Simulador de Fase de Grupos</h2>
+                </div>
+                <div class="card__body">
+                    <div class="input-row">
+                        <div class="input-col">
+                            <label class="input-label" for="vitorias">Vitórias</label>
+                            <input class="inputPequeno" type="number" id="vitorias" placeholder="0">
+                        </div>
+                        <div class="input-col">
+                            <label class="input-label" for="empates">Empates</label>
+                            <input class="inputPequeno" type="number" id="empates" placeholder="0">
+                        </div>
+                        <div class="input-col">
+                            <label class="input-label" for="derrotas">Derrotas</label>
+                            <input class="inputPequeno" type="number" id="derrotas" placeholder="0">
+                        </div>
+                    </div>
+                    <button class="botaoGrande" onclick="calcularClassificacao()">Calcular Classificação</button>
+                    <div id="resultadoClassificacao"></div>
+                </div>
+            </div>
+
+            <!-- CARD 3: Elenco (full width) -->
+            <div class="card card--full" style="animation-delay: 0.2s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--yellow"></div>
+                    <h2>Elenco</h2>
+                </div>
+                <div class="card__body">
+                    <label class="input-label" for="jogadorConvocado">Nome do Jogador</label>
+                    <input class="inputGrande" type="text" id="jogadorConvocado"
+                        placeholder="Nome do jogador a adicionar...">
+                    <div class="convocar-row">
+                        <button class="botaoGrande btn-convocar" onclick="convocarJogador()">Convocar Jogador</button>
+                        <span class="vagas-simples">Vagas: <strong id="vagas"></strong>/26</span>
+                    </div>
+
+                    <ul id="elencoHtml"></ul>
+
+                    <button class="botaoGrande botaoGrande--captain" onclick="sortearCapitao()">★ Sortear
+                        Capitão</button>
+                    <div id="resultadoSorteio"></div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Relatório de Desempenho -->
+            <div class="card card--full report-section" style="animation-delay: 0.3s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--black"></div>
+                    <h2>Relatório de Desempenho</h2>
+                </div>
+                <div class="card__body">
+                    <p class="report-description">Insira os gols marcados em cada jogo da fase de grupos para gerar o
+                        relatório completo de desempenho da seleção.</p>
+                    <button class="botaoGrande" onclick="relatorioDesempenho()">Gerar Relatório</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer__tricolor">
+            <div class="footer__tricolor-red"></div>
+            <div class="footer__tricolor-yellow"></div>
+            <div class="footer__tricolor-green"></div>
+        </div>
+        <div class="footer__star">
+            <span class="secret-trigger">
+                ★
+                <button class="secret-btn" onclick="areaSecreta()" title="" aria-hidden="true">.</button>
+            </span>
+        </div>
+        <div class="footer__info">
+            <p>Desenvolvido por <strong>Kauã Froehlich</strong></p>
+            <p class="footer__motto">Técnico em <strong>Desenvolvimento de Sistemas</strong></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
