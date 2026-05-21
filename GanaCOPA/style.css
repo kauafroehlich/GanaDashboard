@@ -1,0 +1,1157 @@
+/* ============================================================
+   GANA DASHBOARD — Swiss Brutalist Design System
+   Cores de Gana: Vermelho #CE1126 | Amarelo #FCD116 | Verde #006B3F
+   ============================================================ */
+
+/* --- Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* --- CSS Variables (Design Tokens) --- */
+:root {
+    --bg-primary: #EBE8E3;
+    --bg-secondary: #E0DDD8;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5A5A5A;
+    --text-muted: #8A8A8A;
+    --border-color: #C8C5BF;
+    --border-subtle: #DCD9D4;
+
+    --ghana-red: #CE1126;
+    --ghana-yellow: #FCD116;
+    --ghana-green: #006B3F;
+    --ghana-black: #1A1A1A;
+
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Utility: Visually Hidden Star Background --- */
+body::before {
+    content: '★';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50vw;
+    color: rgba(0, 0, 0, 0.015);
+    z-index: 0;
+    pointer-events: none;
+    line-height: 1;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+    background-color: var(--ghana-black);
+    color: #FFFFFF;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* Thin tricolor bar at the very top */
+.header__tricolor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    height: 4px;
+}
+
+.header__tricolor-red {
+    flex: 1;
+    background-color: var(--ghana-red);
+}
+
+.header__tricolor-yellow {
+    flex: 1;
+    background-color: var(--ghana-yellow);
+}
+
+.header__tricolor-green {
+    flex: 1;
+    background-color: var(--ghana-green);
+}
+
+.header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header__crest {
+    width: 72px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.header__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header__subtitle {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ghana-yellow);
+    margin-bottom: 2px;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.header__flag {
+    width: 80px;
+    height: auto;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+/* ============================================================
+   CARD / SECTION PANELS
+   ============================================================ */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0; /* BRUTALIST: sharp corners */
+    padding: 0;
+    position: relative;
+    transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border-color: #B0ACA8;
+}
+
+.card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.card__accent {
+    width: 4px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.card__accent--red { background-color: var(--ghana-red); }
+.card__accent--yellow { background-color: var(--ghana-yellow); }
+.card__accent--green { background-color: var(--ghana-green); }
+.card__accent--black { background-color: var(--ghana-black); }
+
+.card__header h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+}
+
+.card__body {
+    padding: 24px 28px 28px;
+}
+
+/* Card spanning full width */
+.card--full {
+    grid-column: 1 / -1;
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+.inputGrande,
+.inputPequeno {
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0; /* BRUTALIST */
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.inputGrande:focus,
+.inputPequeno:focus {
+    border-color: var(--ghana-black);
+    background-color: #FFFFFF;
+}
+
+.inputGrande::placeholder,
+.inputPequeno::placeholder {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.inputGrande {
+    width: 100%;
+}
+
+.inputPequeno {
+    width: 100%;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.botaoGrande {
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background-color: var(--ghana-black);
+    border: 2px solid var(--ghana-black);
+    border-radius: 0; /* BRUTALIST */
+    padding: 14px 28px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    margin-top: 16px;
+}
+
+.botaoGrande:hover {
+    background-color: #FFFFFF;
+    color: var(--ghana-black);
+    border-color: var(--ghana-black);
+}
+
+.botaoGrande:active {
+    background-color: #000000;
+    border-color: #000000;
+    color: #FFFFFF;
+}
+
+/* Secondary button style */
+.botaoGrande--secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.botaoGrande--secondary:hover {
+    background-color: var(--ghana-black);
+    color: #FFFFFF;
+    border-color: var(--ghana-black);
+}
+
+/* Captain button */
+.botaoGrande--captain {
+    background-color: transparent;
+    color: var(--ghana-black);
+    border: 2px solid var(--ghana-yellow);
+    margin-top: 20px;
+}
+
+.botaoGrande--captain:hover {
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+}
+
+/* ============================================================
+   PLAYER LIST (ELENCO)
+   ============================================================ */
+#elencoHtml {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+    max-height: 340px;
+    overflow-y: auto;
+    overflow-x: hidden; /* Evita a barra de rolagem horizontal quando o jogador selecionado desliza para a direita */
+    padding-right: 5px; /* Adiciona um pequeno padding para que o box-shadow e o transform não fiquem cortados bruscamente */
+}
+
+#elencoHtml li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#elencoHtml li:hover {
+    background-color: var(--bg-secondary);
+}
+
+#elencoHtml li:last-child {
+    border-bottom: none;
+}
+
+.botaoX {
+    font-family: var(--font-family);
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    padding: 0;
+    background-color: var(--ghana-red);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0; /* BRUTALIST */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.botaoX:hover {
+    background-color: #A00D1E;
+    transform: scale(1.1);
+}
+
+/* Vagas counter */
+.vagas-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-yellow);
+}
+
+.vagas-counter__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.vagas-counter__number {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* ============================================================
+   CAPTAIN RESULT (painelAmarelo)
+   ============================================================ */
+.painelAmarelo {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background-color: #FBEA9D;
+    color: var(--ghana-black);
+    border-radius: 0; /* BRUTALIST */
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    border-left: 5px solid var(--ghana-black);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   CAPTAIN HIGHLIGHT
+   ============================================================ */
+li.capitao-destaque {
+    color: var(--ghana-yellow);
+    font-weight: 800;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+li.capitao-destaque::after {
+    content: "★ CAPITÃO";
+    font-size: 0.65rem;
+    font-weight: 900;
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    padding: 2px 6px;
+    margin-left: 10px;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-shadow: none;
+}
+
+.posicao-slot.capitao-destaque {
+    border-color: #FFF !important;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.2), 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5) !important;
+}
+
+.posicao-slot.capitao-destaque .posicao-nome {
+    border-color: #FFF !important;
+    color: var(--ghana-yellow) !important;
+}
+
+.posicao-slot.capitao-destaque .posicao-nome::after {
+    content: " ★";
+    color: #FFF;
+}
+
+/* ============================================================
+   CLASSIFICATION RESULT
+   ============================================================ */
+.texto-verde {
+    display: block;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-green);
+    font-size: 0.9rem;
+    font-weight: 600 !important;
+    color: var(--ghana-green) !important;
+    min-height: 18px;
+    animation: fadeResult 0.4s ease;
+}
+
+.texto-vermelho {
+    display: block;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-red);
+    font-size: 0.9rem;
+    font-weight: 600 !important;
+    color: var(--ghana-red) !important;
+    min-height: 18px;
+    animation: fadeResult 0.4s ease;
+}
+
+@keyframes fadeResult {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#resultadoClassificacao {
+    /* Mantém o mesmo espaçamento que o Treinador */
+    margin-top: 16px;
+}
+
+#resultadoClassificacao:empty {
+    /* Esconde o container quando não há resultado, igual ao Treinador, para não gerar espaço fantasma */
+    display: none;
+}
+
+/* ============================================================
+   COMMANDER DISPLAY
+   ============================================================ */
+#exibirNomeComandante {
+    display: block;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-green);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-height: 18px;
+}
+
+#exibirNomeComandante:empty {
+    display: none;
+}
+
+/* ============================================================
+   REPORT SECTION
+   ============================================================ */
+.report-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+}
+
+.report-section .card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.report-description {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   SECRET AREA BUTTON — HIDDEN EASTER EGG
+   The button is invisible by default.
+   It only appears when the user hovers on the footer year "2026"
+   while holding Ctrl+Shift (simulated via the star glyph triple-click).
+   Actually: we make it a transparent 1x1 pixel inside the footer
+   star glyph, visible only on a specific hover sequence.
+   ============================================================ */
+.secret-trigger {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    user-select: none;
+}
+
+.secret-btn {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    border: none;
+    background: transparent;
+    color: transparent;
+    font-size: 0;
+    padding: 0;
+    cursor: default;
+    pointer-events: none;
+    transition: none;
+}
+
+/* The secret button becomes clickable only when the user 
+   hovers the star in the footer AND clicks it exactly 5 times quickly.
+   We use CSS: on hover of the star container, we make the button 
+   at least clickable (pointer-events: auto) but still invisible. */
+.secret-trigger:hover .secret-btn {
+    pointer-events: auto;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    background-color: var(--ghana-black);
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 48px 40px 32px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-top: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.footer__tricolor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    height: 4px;
+    margin-bottom: 0;
+}
+
+.footer__tricolor-red { flex: 1; background-color: var(--ghana-red); }
+.footer__tricolor-yellow { flex: 1; background-color: var(--ghana-yellow); }
+.footer__tricolor-green { flex: 1; background-color: var(--ghana-green); }
+
+.footer__star {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.12);
+    display: inline-block;
+    margin: 16px 0 32px;
+}
+
+.footer a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+#elencoHtml::-webkit-scrollbar {
+    width: 4px;
+}
+
+#elencoHtml::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+#elencoHtml::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+}
+
+/* ============================================================
+   NEW STYLES (ADDED FOR ENHANCEMENTS)
+   ============================================================ */
+
+/* 1.1 Header & 3.3 Glassmorphism & 3.5 Header fadeIn */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.header {
+    background-color: var(--ghana-black);
+    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
+    animation: fadeIn 0.8s ease;
+}
+
+.header__content {
+    padding: 16px 40px;
+}
+
+.header h1 {
+    font-size: 2.8rem;
+    font-weight: 900;
+}
+
+@keyframes scaleFadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.header__crest {
+    animation: scaleFadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 1.3 Body background */
+body {
+    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="paperNoise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/%3E%3CfeColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.05 0"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23paperNoise)"/%3E%3C/svg%3E');
+}
+
+@keyframes rotateStar {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+body::before {
+    color: rgba(0, 0, 0, 0.025);
+    animation: rotateStar 120s linear infinite;
+}
+
+/* 1.2, 3.1 & 3.5 Cards */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    border-top: 3px solid transparent;
+    transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+.card__accent {
+    display: none;
+}
+
+.card:nth-child(1) .card__header { border-left: 3px solid var(--border-color); transition: border-color var(--transition-fast); }
+.card:nth-child(1) { border-top-color: var(--border-color); }
+.card:nth-child(1):hover { border-top-color: var(--ghana-green); }
+.card:nth-child(1):hover .card__header { border-left-color: var(--ghana-green); }
+
+.card:nth-child(2) .card__header { border-left: 3px solid var(--border-color); transition: border-color var(--transition-fast); }
+.card:nth-child(2) { border-top-color: var(--border-color); }
+.card:nth-child(2):hover { border-top-color: var(--ghana-red); }
+.card:nth-child(2):hover .card__header { border-left-color: var(--ghana-red); }
+
+.card:nth-child(3) .card__header { border-left: 3px solid var(--border-color); transition: border-color var(--transition-fast); }
+.card:nth-child(3) { border-top-color: var(--border-color); }
+.card:nth-child(3):hover { border-top-color: var(--ghana-yellow); }
+.card:nth-child(3):hover .card__header { border-left-color: var(--ghana-yellow); }
+
+.card:nth-child(4) .card__header { border-left: 3px solid var(--border-color); transition: border-color var(--transition-fast); }
+.card:nth-child(4) { border-top-color: var(--border-color); }
+.card:nth-child(4):hover { border-top-color: var(--ghana-black); }
+.card:nth-child(4):hover .card__header { border-left-color: var(--ghana-black); }
+
+/* Botões unificados em preto e branco */
+
+/* 1.4 Tabular nums */
+input[type="number"] {
+    font-variant-numeric: tabular-nums;
+}
+
+/* 2.1 Inputs Labels */
+.input-label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.input-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2.2 Empty state list */
+#elencoHtml {
+    scrollbar-gutter: stable;
+}
+
+#elencoHtml:empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+    border: 1px dashed var(--border-color);
+    margin-top: 20px;
+}
+#elencoHtml:empty::before {
+    content: "Nenhum jogador convocado ainda";
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+/* 2.3 Visual feedback */
+#exibirNomeComandante {
+    animation: slideIn 0.3s ease;
+}
+
+#elencoHtml li {
+    animation: slideIn 0.2s ease;
+}
+
+/* 2.5 Report Card Band */
+.report-band {
+    display: flex;
+    height: 6px;
+    width: 100%;
+}
+.report-band__red { flex: 1; background-color: var(--ghana-red); }
+.report-band__yellow { flex: 1; background-color: var(--ghana-yellow); }
+.report-band__green { flex: 1; background-color: var(--ghana-green); }
+
+/* 3.2 Focus visible */
+button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--ghana-yellow) !important;
+    outline-offset: 2px;
+}
+
+/* 3.3 Glassmorphism footer (removed) */
+.footer {
+    background-color: var(--ghana-black);
+}
+
+/* 3.4 Scrollbar */
+#elencoHtml::-webkit-scrollbar-thumb:hover {
+    background: #A09C98;
+}
+
+/* 4.1 Tricolor header interactive */
+.header__tricolor, .footer__tricolor {
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.header__tricolor::after, .footer__tricolor::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+/* 4.3 Vagas alinhadas */
+.convocar-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 16px;
+}
+.convocar-row .btn-convocar {
+    margin-top: 0;
+    width: 100%;
+}
+.vagas-simples {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+.vagas-simples strong {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* 4.4 Card Header repeating gradient */
+.card__header {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(206, 17, 38, 0.02),
+        rgba(206, 17, 38, 0.02) 10px,
+        rgba(252, 209, 22, 0.02) 10px,
+        rgba(252, 209, 22, 0.02) 20px,
+        rgba(0, 107, 63, 0.02) 20px,
+        rgba(0, 107, 63, 0.02) 30px
+    );
+}
+
+/* 4.5 Footer Motto & Star Glow */
+.footer__motto {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.footer__star {
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.footer__star:hover {
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 8px rgba(252, 209, 22, 0.6);
+}
+
+/* ============================================================
+   CAMPO 3D EM PERSPECTIVA (ELENCO)
+   ============================================================ */
+#campo3D-container {
+    margin-top: 30px;
+    margin-bottom: 70px;
+    display: flex; /* Campo SEMPRE visível */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.instrucao-campo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* ============================================================
+   PRANCHETA TÁTICA (3D PERSPECTIVE)
+   ============================================================ */
+#campo3D {
+    width: 100%;
+    max-width: 480px;
+    height: 340px;
+    background-color: #0b5e34;
+    border: 3px solid var(--ghana-black);
+    position: relative;
+    overflow: visible; /* PERMITE que elementos flutuem fora da caixa do campo! */
+    
+    /* Efeito de perspectiva sofisticado */
+    transform: perspective(1000px) rotateX(45deg);
+    transform-style: preserve-3d; /* CRUCIAL para não cortar elementos filhos rotacionados */
+    box-shadow: 0 30px 40px rgba(0,0,0,0.15), 0 0 0 5px rgba(255, 255, 255, 0.3);
+    
+    /* Gramado e marcação */
+    background-image: 
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 30px, transparent 30px, transparent 60px),
+        linear-gradient(to bottom, rgba(255,255,255,0.4) 4px, transparent 4px),
+        radial-gradient(circle at 50% 0%, transparent 60px, rgba(255,255,255,0.4) 60px, rgba(255,255,255,0.4) 64px, transparent 64px);
+    background-size: 100% 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+/* Grande Área */
+#campo3D::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: 25%;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-bottom: none;
+    pointer-events: none;
+}
+
+/* Pequena Área */
+#campo3D::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22%;
+    height: 8%;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-bottom: none;
+    pointer-events: none;
+}
+
+/* Slots táticos (Fichas com Física de Inclinação) */
+.posicao-slot {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background-color: var(--ghana-black);
+    border: 2px solid var(--ghana-yellow);
+    color: var(--ghana-yellow);
+    border-radius: 50%;
+    
+    /* Posição plana no gramado. Variáveis tilt são controladas pelo mousemove no HTML */
+    transform: translate(-50%, -50%) translateZ(2px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-style: preserve-3d;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.8rem;
+    transition: all 0.15s ease-out; /* Transição mais rápida para acompanhar o mouse fisicamente */
+    z-index: 5;
+    
+    box-shadow: 0 1px 0 #b38f00, 0 3px 0 #806600, 0 8px 15px rgba(0,0,0,0.5);
+}
+
+.posicao-slot:hover {
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    border-color: var(--ghana-black);
+    /* Levanta de forma mais contida (8px) e mantém a física de inclinação ativa */
+    transform: translate(-50%, -50%) translateZ(8px) scale(1.05) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    box-shadow: 0 2px 0 #1a1a1a, 0 4px 0 #0d0d0d, 0 12px 20px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+.posicao-sigla {
+    font-size: 0.8rem;
+    font-weight: 900;
+    font-family: var(--font-family);
+}
+
+/* Nome do jogador como uma "placa" (Billboard) em pé sobre a ficha */
+.posicao-nome {
+    position: absolute;
+    top: -5px; 
+    left: 50%;
+    
+    /* Placa em pé. Como o botão pode inclinar, a placa acompanha organicamente! */
+    transform: translate(-50%, -100%) rotateX(-45deg) translateZ(10px);
+    
+    background-color: var(--ghana-black);
+    color: #FFFFFF;
+    border: 1px solid var(--ghana-yellow);
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+    display: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 20;
+    pointer-events: none; 
+}
+
+.posicao-slot.ocupado {
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    border-color: var(--ghana-black);
+    box-shadow: 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5);
+    /* Efeito de impacto mais suave e natural (translateZ de 25px em vez de 80px) */
+    animation: impactDrop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+}
+
+@keyframes impactDrop {
+    0% { transform: translate(-50%, -50%) translateZ(25px) scale(1.15) rotateZ(-10deg); opacity: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    100% { transform: translate(-50%, -50%) translateZ(2px) scale(1) rotateZ(0deg); opacity: 1; box-shadow: 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5); }
+}
+
+.posicao-slot.ocupado:hover {
+    box-shadow: 0 2px 0 #1a1a1a, 0 4px 0 #0d0d0d, 0 12px 20px rgba(0,0,0,0.4);
+}
+
+.posicao-slot.ocupado .posicao-nome {
+    display: block;
+    /* Animação limpa e fluida (ease-out) no lugar de uma rotação saltitante */
+    animation: popBillboard 0.35s ease-out forwards;
+}
+
+@keyframes popBillboard {
+    0% { 
+        transform: translate(-50%, -70%) rotateX(-45deg) translateZ(0px) scale(0.9); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translate(-50%, -100%) rotateX(-45deg) translateZ(10px) scale(1); 
+        opacity: 1; 
+    }
+}
+
+/* Jogador selecionado na lista */
+#elencoHtml li.jogador-selecionado {
+    background-color: var(--ghana-yellow) !important;
+    color: var(--ghana-black) !important;
+    border-left: 6px solid var(--ghana-black);
+    font-weight: 800;
+    transform: translateX(8px); /* Desliza ligeiramente para a direita */
+    box-shadow: -3px 5px 12px rgba(0,0,0,0.1);
+    animation: pulseSelecionado 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulseSelecionado {
+    0% { background-color: #FBEA9D; box-shadow: -3px 5px 10px rgba(0,0,0,0.05); }
+    100% { background-color: var(--ghana-yellow); box-shadow: -5px 8px 18px rgba(252, 209, 22, 0.4); }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header__content {
+        padding: 20px 24px;
+        gap: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .header__crest {
+        width: 52px;
+    }
+
+    .header__flag {
+        width: 36px;
+    }
+
+    .main-content {
+        padding: 24px 16px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header__content {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 16px;
+    }
+
+    .header__text {
+        align-items: center;
+    }
+
+    .input-row {
+        grid-template-columns: 1fr;
+    }
+
+    .card__body {
+        padding: 20px;
+    }
+}

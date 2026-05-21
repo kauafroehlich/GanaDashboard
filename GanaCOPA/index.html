@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard de Gestão da Seleção Nacional de Futebol de Gana — Copa do Mundo 2026">
+    <title>Gana Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="header__tricolor">
+            <div class="header__tricolor-red"></div>
+            <div class="header__tricolor-yellow"></div>
+            <div class="header__tricolor-green"></div>
+        </div>
+        <div class="header__content">
+            <div class="header__left">
+                <img src="escudodaselecaodegana.png" alt="Escudo da Seleção de Gana" class="header__crest">
+                <div class="header__text">
+                    <span class="header__subtitle">Seleção Nacional de Futebol</span>
+                    <h1>Gana</h1>
+                </div>
+            </div>
+            <img src="bandeiradegana.png" alt="Bandeira de Gana" class="header__flag">
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+        <div class="dashboard-grid">
+
+            <!-- CARD 1: Registro de Comandante -->
+            <div class="card" style="animation-delay: 0s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--green"></div>
+                    <h2>Registro de Comandante</h2>
+                </div>
+                <div class="card__body">
+                    <label class="input-label" for="nomeComandante">Nome do Comandante</label>
+                    <input class="inputGrande" type="text" id="nomeComandante" placeholder="Seu nome...">
+                    <button class="botaoGrande" onclick="assumirCargo()">Assumir Cargo</button>
+                    <span id="exibirNomeComandante"></span>
+                </div>
+            </div>
+
+            <!-- CARD 2: Simulador de Fase de Grupos -->
+            <div class="card" style="animation-delay: 0.1s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--red"></div>
+                    <h2>Simulador de Fase de Grupos</h2>
+                </div>
+                <div class="card__body">
+                    <div class="input-row">
+                        <div class="input-col">
+                            <label class="input-label" for="vitorias">Vitórias</label>
+                            <input class="inputPequeno" type="number" id="vitorias" placeholder="0">
+                        </div>
+                        <div class="input-col">
+                            <label class="input-label" for="empates">Empates</label>
+                            <input class="inputPequeno" type="number" id="empates" placeholder="0">
+                        </div>
+                        <div class="input-col">
+                            <label class="input-label" for="derrotas">Derrotas</label>
+                            <input class="inputPequeno" type="number" id="derrotas" placeholder="0">
+                        </div>
+                    </div>
+                    <button class="botaoGrande" onclick="calcularClassificacao()">Calcular Classificação</button>
+                    <div id="resultadoClassificacao"></div>
+                </div>
+            </div>
+
+            <!-- CARD 3: Elenco (full width) -->
+            <div class="card card--full" style="animation-delay: 0.2s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--yellow"></div>
+                    <h2>Elenco</h2>
+                </div>
+                <div class="card__body">
+                    <label class="input-label" for="jogadorConvocado">Nome do Jogador</label>
+                    <input class="inputGrande" type="text" id="jogadorConvocado"
+                        placeholder="Nome do jogador a adicionar...">
+                    <div class="convocar-row">
+                        <button class="botaoGrande btn-convocar" onclick="convocarJogador()">Convocar Jogador</button>
+                        <span class="vagas-simples">Vagas: <strong id="vagas"></strong>/26</span>
+                    </div>
+
+                    <ul id="elencoHtml"></ul>
+
+                    <!-- ========== PRANCHETA TÁTICA (3D PERSPECTIVE) ========== -->
+                    <div id="campo3D-container">
+                        <div class="instrucao-campo">Selecione um jogador na lista e clique em uma posição no campo:
+                        </div>
+                        <div id="campo3D">
+                            <!-- Goleiro -->
+                            <div class="posicao-slot" style="bottom: 8%; left: 50%;" data-pos="GK">
+                                <span class="posicao-sigla">GOL</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <!-- Defensores -->
+                            <div class="posicao-slot" style="bottom: 25%; left: 35%;" data-pos="CB1">
+                                <span class="posicao-sigla">ZAG</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 25%; left: 65%;" data-pos="CB2">
+                                <span class="posicao-sigla">ZAG</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 30%; left: 15%;" data-pos="LB">
+                                <span class="posicao-sigla">LE</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 30%; left: 85%;" data-pos="RB">
+                                <span class="posicao-sigla">LD</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <!-- Meias -->
+                            <div class="posicao-slot" style="bottom: 48%; left: 50%;" data-pos="DM">
+                                <span class="posicao-sigla">VOL</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 60%; left: 25%;" data-pos="LM">
+                                <span class="posicao-sigla">MC</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 60%; left: 75%;" data-pos="RM">
+                                <span class="posicao-sigla">MC</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <!-- Atacantes -->
+                            <div class="posicao-slot" style="bottom: 80%; left: 18%;" data-pos="LW">
+                                <span class="posicao-sigla">PE</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 86%; left: 50%;" data-pos="ST">
+                                <span class="posicao-sigla">ATA</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                            <div class="posicao-slot" style="bottom: 80%; left: 82%;" data-pos="RW">
+                                <span class="posicao-sigla">PD</span>
+                                <span class="posicao-nome"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const elencoHtml = document.getElementById("elencoHtml");
+                            let jogadorSelecionado = null;
+
+                            // O campo agora é sempre visível via CSS
+
+                            const observer = new MutationObserver((mutations) => {
+                                const jogadores = elencoHtml.querySelectorAll("li");
+
+                                // Adiciona eventos de clique aos itens da lista
+                                jogadores.forEach(li => {
+                                    li.style.cursor = "pointer";
+                                    li.onclick = function (e) {
+                                        if (e.target.classList.contains("botaoX")) return;
+
+                                        document.querySelectorAll("#elencoHtml li").forEach(item => {
+                                            item.classList.remove("jogador-selecionado");
+                                        });
+
+                                        if (jogadorSelecionado === this) {
+                                            jogadorSelecionado = null;
+                                        } else {
+                                            jogadorSelecionado = this;
+                                            this.classList.add("jogador-selecionado");
+                                        }
+                                    };
+                                });
+
+                                // Verifica se há novos jogadores adicionados para auto-seleção
+                                for (let mutation of mutations) {
+                                    if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+                                        const novosLis = Array.from(mutation.addedNodes).filter(n => n.tagName === "LI");
+                                        if (novosLis.length > 0) {
+                                            const lastAdded = novosLis[novosLis.length - 1];
+                                            document.querySelectorAll("#elencoHtml li").forEach(item => {
+                                                item.classList.remove("jogador-selecionado");
+                                            });
+                                            jogadorSelecionado = lastAdded;
+                                            lastAdded.classList.add("jogador-selecionado");
+
+                                            // Scroll suave para a lista para ver o jogador selecionado
+                                            elencoHtml.scrollTop = elencoHtml.scrollHeight;
+                                        }
+                                    }
+                                }
+
+                                // Limpa jogadores que foram removidos do elenco
+                                const nomesNoElenco = Array.from(jogadores).map(li => {
+                                    const texto = li.textContent || "";
+                                    return texto.replace(/^\d+\s*-\s*/, "").replace(/\s*X$/, "").trim();
+                                });
+
+                                document.querySelectorAll(".posicao-slot").forEach(slot => {
+                                    const nomeSpan = slot.querySelector(".posicao-nome");
+                                    if (slot.classList.contains("ocupado") && !nomesNoElenco.includes(nomeSpan.textContent)) {
+                                        slot.classList.remove("ocupado");
+                                        slot.classList.remove("capitao-destaque");
+                                        nomeSpan.textContent = "";
+                                    }
+                                });
+                            });
+
+                            observer.observe(elencoHtml, { childList: true });
+
+                            // Observador para o Sorteio de Capitão (monitora a div de resultado sem mexer no script.js)
+                            window.capitaoAtual = null;
+                            const observerCapitao = new MutationObserver(() => {
+                                const painel = document.querySelector("#resultadoSorteio .painelAmarelo");
+                                if (painel) {
+                                    const texto = painel.textContent || "";
+                                    const nomeCapitao = texto.replace("O Capitão é:", "").trim();
+                                    window.capitaoAtual = nomeCapitao;
+                                    
+                                    // Remove destaques antigos
+                                    document.querySelectorAll(".capitao-destaque").forEach(el => el.classList.remove("capitao-destaque"));
+                                    
+                                    // Destaca na lista
+                                    document.querySelectorAll("#elencoHtml li").forEach(li => {
+                                        const nomeLi = (li.textContent || "").replace(/^\d+\s*-\s*/, "").replace(/\s*X$/, "").trim();
+                                        if (nomeLi === nomeCapitao) {
+                                            li.classList.add("capitao-destaque");
+                                        }
+                                    });
+                                    
+                                    // Destaca no campo (se já estiver escalado)
+                                    document.querySelectorAll(".posicao-slot").forEach(slot => {
+                                        const nomeSlot = slot.querySelector(".posicao-nome").textContent;
+                                        if (nomeSlot === nomeCapitao) {
+                                            slot.classList.add("capitao-destaque");
+                                        }
+                                    });
+                                }
+                            });
+                            observerCapitao.observe(document.getElementById("resultadoSorteio"), { childList: true, subtree: true });
+
+                            // Gerencia clique nos slots do campo 3D
+                            document.querySelectorAll(".posicao-slot").forEach(slot => {
+                                // Física de Inclinação 3D no Hover (Parallax/Tilt effect)
+                                slot.addEventListener("mousemove", function (e) {
+                                    const rect = this.getBoundingClientRect();
+                                    const x = e.clientX - rect.left;
+                                    const y = e.clientY - rect.top;
+                                    const centerX = rect.width / 2;
+                                    const centerY = rect.height / 2;
+
+                                    // Calcula inclinação baseada em onde o mouse está (limite de 15 graus)
+                                    const tiltX = ((centerY - y) / centerY) * -18;
+                                    const tiltY = ((x - centerX) / centerX) * 18;
+
+                                    this.style.setProperty('--tilt-x', `${tiltX}deg`);
+                                    this.style.setProperty('--tilt-y', `${tiltY}deg`);
+                                });
+
+                                slot.addEventListener("mouseleave", function () {
+                                    // Reseta a física quando o mouse sai
+                                    this.style.setProperty('--tilt-x', `0deg`);
+                                    this.style.setProperty('--tilt-y', `0deg`);
+                                });
+
+                                slot.addEventListener("click", function () {
+                                    const nomeSpan = this.querySelector(".posicao-nome");
+
+                                    if (jogadorSelecionado) {
+                                        const textoCompleto = jogadorSelecionado.textContent || "";
+                                        const nomeJogador = textoCompleto.replace(/^\d+\s*-\s*/, "").replace(/\s*X$/, "").trim();
+
+                                        // Remove o jogador de outra posição se ele já estiver escalado
+                                        document.querySelectorAll(".posicao-slot").forEach(outroSlot => {
+                                            const outroNome = outroSlot.querySelector(".posicao-nome");
+                                            if (outroSlot !== this && outroNome.textContent === nomeJogador) {
+                                                outroSlot.classList.remove("ocupado");
+                                                outroSlot.classList.remove("capitao-destaque");
+                                                outroNome.textContent = "";
+                                            }
+                                        });
+
+                                        nomeSpan.textContent = nomeJogador;
+                                        this.classList.add("ocupado");
+
+                                        // Se o jogador sendo escalado é o capitão atual, destaca a ficha
+                                        if (window.capitaoAtual && nomeJogador === window.capitaoAtual) {
+                                            this.classList.add("capitao-destaque");
+                                        } else {
+                                            this.classList.remove("capitao-destaque");
+                                        }
+
+                                        // Remove a seleção visual
+                                        jogadorSelecionado.classList.remove("jogador-selecionado");
+                                        jogadorSelecionado = null;
+                                    } else {
+                                        // Clique em slot ocupado sem ter jogador selecionado: limpa o slot
+                                        if (this.classList.contains("ocupado")) {
+                                            this.classList.remove("ocupado");
+                                            this.classList.remove("capitao-destaque");
+                                            nomeSpan.textContent = "";
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
+                    <button class="botaoGrande botaoGrande--captain" onclick="sortearCapitao()">★ Sortear
+                        Capitão</button>
+                    <div id="resultadoSorteio"></div>
+                </div>
+            </div>
+
+            <!-- CARD 4: Relatório de Desempenho -->
+            <div class="card card--full report-section" style="animation-delay: 0.3s;">
+                <div class="card__header">
+                    <div class="card__accent card__accent--black"></div>
+                    <h2>Relatório de Desempenho</h2>
+                </div>
+                <div class="card__body">
+                    <p class="report-description">Insira os gols marcados em cada jogo da fase de grupos para gerar o
+                        relatório completo de desempenho da seleção.</p>
+                    <button class="botaoGrande" onclick="relatorioDesempenho()">Gerar Relatório</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer__tricolor">
+            <div class="footer__tricolor-red"></div>
+            <div class="footer__tricolor-yellow"></div>
+            <div class="footer__tricolor-green"></div>
+        </div>
+        <div class="footer__star">
+            <span class="secret-trigger">
+                ★
+                <button class="secret-btn" onclick="areaSecreta()" title="" aria-hidden="true">.</button>
+            </span>
+        </div>
+        <div class="footer__info">
+            <p>Desenvolvido por <strong>Kauã Froehlich</strong></p>
+            <p class="footer__motto">Técnico e
+                m <strong>Desenvolvimento de Sistemas</strong></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
