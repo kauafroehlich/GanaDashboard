@@ -337,6 +337,8 @@ body::before {
     margin: 20px 0 0;
     max-height: 340px;
     overflow-y: auto;
+    overflow-x: hidden; /* Evita a barra de rolagem horizontal quando o jogador selecionado desliza para a direita */
+    padding-right: 5px; /* Adiciona um pequeno padding para que o box-shadow e o transform não fiquem cortados bruscamente */
 }
 
 #elencoHtml li {
@@ -348,7 +350,7 @@ body::before {
     font-weight: 500;
     color: var(--text-primary);
     border-bottom: 1px solid var(--border-subtle);
-    transition: background-color var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 #elencoHtml li:hover {
@@ -437,21 +439,68 @@ body::before {
 }
 
 /* ============================================================
+   CAPTAIN HIGHLIGHT
+   ============================================================ */
+li.capitao-destaque {
+    color: var(--ghana-yellow);
+    font-weight: 800;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+li.capitao-destaque::after {
+    content: "★ CAPITÃO";
+    font-size: 0.65rem;
+    font-weight: 900;
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    padding: 2px 6px;
+    margin-left: 10px;
+    border-radius: 4px;
+    vertical-align: middle;
+    text-shadow: none;
+}
+
+.posicao-slot.capitao-destaque {
+    border-color: #FFF !important;
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.2), 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5) !important;
+}
+
+.posicao-slot.capitao-destaque .posicao-nome {
+    border-color: #FFF !important;
+    color: var(--ghana-yellow) !important;
+}
+
+.posicao-slot.capitao-destaque .posicao-nome::after {
+    content: " ★";
+    color: #FFF;
+}
+
+/* ============================================================
    CLASSIFICATION RESULT
    ============================================================ */
 .texto-verde {
+    display: block;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-green);
+    font-size: 0.9rem;
+    font-weight: 600 !important;
     color: var(--ghana-green) !important;
-    font-weight: 800 !important;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
+    min-height: 18px;
     animation: fadeResult 0.4s ease;
 }
 
 .texto-vermelho {
+    display: block;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--ghana-red);
+    font-size: 0.9rem;
+    font-weight: 600 !important;
     color: var(--ghana-red) !important;
-    font-weight: 800 !important;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
+    min-height: 18px;
     animation: fadeResult 0.4s ease;
 }
 
@@ -467,8 +516,13 @@ body::before {
 }
 
 #resultadoClassificacao {
+    /* Mantém o mesmo espaçamento que o Treinador */
     margin-top: 16px;
-    text-align: center;
+}
+
+#resultadoClassificacao:empty {
+    /* Esconde o container quando não há resultado, igual ao Treinador, para não gerar espaço fantasma */
+    display: none;
 }
 
 /* ============================================================
@@ -856,6 +910,200 @@ button:focus-visible, input:focus-visible {
 .footer__star:hover {
     color: rgba(255, 255, 255, 0.5);
     text-shadow: 0 0 8px rgba(252, 209, 22, 0.6);
+}
+
+/* ============================================================
+   CAMPO 3D EM PERSPECTIVA (ELENCO)
+   ============================================================ */
+#campo3D-container {
+    margin-top: 30px;
+    margin-bottom: 70px;
+    display: flex; /* Campo SEMPRE visível */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.instrucao-campo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* ============================================================
+   PRANCHETA TÁTICA (3D PERSPECTIVE)
+   ============================================================ */
+#campo3D {
+    width: 100%;
+    max-width: 480px;
+    height: 340px;
+    background-color: #0b5e34;
+    border: 3px solid var(--ghana-black);
+    position: relative;
+    overflow: visible; /* PERMITE que elementos flutuem fora da caixa do campo! */
+    
+    /* Efeito de perspectiva sofisticado */
+    transform: perspective(1000px) rotateX(45deg);
+    transform-style: preserve-3d; /* CRUCIAL para não cortar elementos filhos rotacionados */
+    box-shadow: 0 30px 40px rgba(0,0,0,0.15), 0 0 0 5px rgba(255, 255, 255, 0.3);
+    
+    /* Gramado e marcação */
+    background-image: 
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 30px, transparent 30px, transparent 60px),
+        linear-gradient(to bottom, rgba(255,255,255,0.4) 4px, transparent 4px),
+        radial-gradient(circle at 50% 0%, transparent 60px, rgba(255,255,255,0.4) 60px, rgba(255,255,255,0.4) 64px, transparent 64px);
+    background-size: 100% 100%;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+/* Grande Área */
+#campo3D::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: 25%;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-bottom: none;
+    pointer-events: none;
+}
+
+/* Pequena Área */
+#campo3D::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22%;
+    height: 8%;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-bottom: none;
+    pointer-events: none;
+}
+
+/* Slots táticos (Fichas com Física de Inclinação) */
+.posicao-slot {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background-color: var(--ghana-black);
+    border: 2px solid var(--ghana-yellow);
+    color: var(--ghana-yellow);
+    border-radius: 50%;
+    
+    /* Posição plana no gramado. Variáveis tilt são controladas pelo mousemove no HTML */
+    transform: translate(-50%, -50%) translateZ(2px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    transform-style: preserve-3d;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.8rem;
+    transition: all 0.15s ease-out; /* Transição mais rápida para acompanhar o mouse fisicamente */
+    z-index: 5;
+    
+    box-shadow: 0 1px 0 #b38f00, 0 3px 0 #806600, 0 8px 15px rgba(0,0,0,0.5);
+}
+
+.posicao-slot:hover {
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    border-color: var(--ghana-black);
+    /* Levanta de forma mais contida (8px) e mantém a física de inclinação ativa */
+    transform: translate(-50%, -50%) translateZ(8px) scale(1.05) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+    box-shadow: 0 2px 0 #1a1a1a, 0 4px 0 #0d0d0d, 0 12px 20px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+.posicao-sigla {
+    font-size: 0.8rem;
+    font-weight: 900;
+    font-family: var(--font-family);
+}
+
+/* Nome do jogador como uma "placa" (Billboard) em pé sobre a ficha */
+.posicao-nome {
+    position: absolute;
+    top: -5px; 
+    left: 50%;
+    
+    /* Placa em pé. Como o botão pode inclinar, a placa acompanha organicamente! */
+    transform: translate(-50%, -100%) rotateX(-45deg) translateZ(10px);
+    
+    background-color: var(--ghana-black);
+    color: #FFFFFF;
+    border: 1px solid var(--ghana-yellow);
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+    display: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 20;
+    pointer-events: none; 
+}
+
+.posicao-slot.ocupado {
+    background-color: var(--ghana-yellow);
+    color: var(--ghana-black);
+    border-color: var(--ghana-black);
+    box-shadow: 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5);
+    /* Efeito de impacto mais suave e natural (translateZ de 25px em vez de 80px) */
+    animation: impactDrop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+}
+
+@keyframes impactDrop {
+    0% { transform: translate(-50%, -50%) translateZ(25px) scale(1.15) rotateZ(-10deg); opacity: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    100% { transform: translate(-50%, -50%) translateZ(2px) scale(1) rotateZ(0deg); opacity: 1; box-shadow: 0 1px 0 #1a1a1a, 0 3px 0 #0d0d0d, 0 8px 15px rgba(0,0,0,0.5); }
+}
+
+.posicao-slot.ocupado:hover {
+    box-shadow: 0 2px 0 #1a1a1a, 0 4px 0 #0d0d0d, 0 12px 20px rgba(0,0,0,0.4);
+}
+
+.posicao-slot.ocupado .posicao-nome {
+    display: block;
+    /* Animação limpa e fluida (ease-out) no lugar de uma rotação saltitante */
+    animation: popBillboard 0.35s ease-out forwards;
+}
+
+@keyframes popBillboard {
+    0% { 
+        transform: translate(-50%, -70%) rotateX(-45deg) translateZ(0px) scale(0.9); 
+        opacity: 0; 
+    }
+    100% { 
+        transform: translate(-50%, -100%) rotateX(-45deg) translateZ(10px) scale(1); 
+        opacity: 1; 
+    }
+}
+
+/* Jogador selecionado na lista */
+#elencoHtml li.jogador-selecionado {
+    background-color: var(--ghana-yellow) !important;
+    color: var(--ghana-black) !important;
+    border-left: 6px solid var(--ghana-black);
+    font-weight: 800;
+    transform: translateX(8px); /* Desliza ligeiramente para a direita */
+    box-shadow: -3px 5px 12px rgba(0,0,0,0.1);
+    animation: pulseSelecionado 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulseSelecionado {
+    0% { background-color: #FBEA9D; box-shadow: -3px 5px 10px rgba(0,0,0,0.05); }
+    100% { background-color: var(--ghana-yellow); box-shadow: -5px 8px 18px rgba(252, 209, 22, 0.4); }
 }
 
 /* ============================================================
