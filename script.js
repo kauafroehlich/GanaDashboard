@@ -52,7 +52,7 @@ function atualizarTela() {
     let htmlAcumulado = ""
 
     for (i = 0; i < elenco.length; i++) {
-        htmlAcumulado += "<li>" + (i + 1) + " - " + elenco[i] + " <button class='botaoX' onclick='removerJogador(" + i + ")'>X</button>" + "</li>"
+        htmlAcumulado += "<li><span class='nome-jogador'>" + (i + 1) + " - " + elenco[i] + "</span> <button class='botaoX' onclick='removerJogador(" + i + ")'>X</button>" + "</li>"
     }
     document.getElementById("elencoHtml").innerHTML = htmlAcumulado
     document.getElementById("vagas").innerHTML = 26 - elenco.length
